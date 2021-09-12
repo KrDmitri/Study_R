@@ -94,7 +94,8 @@ cat('5*8=',m,'\n')
 ```
 
 ## 사용자 정의 함수의 저장 및 호출
-<img width="312" alt="스크린샷 2021-09-12 오후 6 23 27" src="https://user-images.githubusercontent.com/86886489/132982255-16c7a1e7-0fe3-48f4-98d3-007f69f5b127.png">
+<img width="312" alt="스크린샷 2021-09-12 오후 6 23 27" src="https://user-images.githubusercontent.com/86886489/132982255-16c7a1e7-0fe3-48f4-98d3-007f69f5b127.png">  
+
 ```R
 setwd("/Users/joseongbeom/Devspace/R/source/Ch04")      # myfunc.R이 저장된 폴더
 source("myfunc.R")                                      # myfunc.R 안에 있는 함수 실행
