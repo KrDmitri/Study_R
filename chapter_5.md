@@ -34,7 +34,7 @@ ds <- table(favorite)
 ds
 barplot(ds, main='favorite season')
 ```
-![스크린샷 2021-09-12 오후 7 52 52](https://user-images.githubusercontent.com/86886489/132984789-00746279-b0c8-4e10-991b-cb89a3a0b740.png)
+![스크린샷 2021-09-12 오후 7 52 52](https://user-images.githubusercontent.com/86886489/132984789-00746279-b0c8-4e10-991b-cb89a3a0b740.png)  
 barplot()함수는 다양한 매개변수를 가질 수 있으며, 매개변수값에 따라 막대의 색을 다르게 하거나 x축, y축의 레이블을 지정할 수도 있다.  
 
 ## 도수분포표 데이터의 순서 정렬
