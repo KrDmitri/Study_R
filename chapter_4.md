@@ -105,3 +105,17 @@ b <- mydiv(30,4)
 a+b
 mydiv(mydiv(20,2),5)
 ```
+
+## 조건에 맞는 데이터의 위치 찾기
+which(), which.max(), which.min()  
+```R
+score <- c(76,84,69,50,95,60,82,71,88,84)
+which(score==69)
+which(score>=85)
+max(score)
+which.max(score)
+min(score)
+which.min(score)
+```
+실행 결과  
+![스크린샷 2021-09-12 오후 6 30 56](https://user-images.githubusercontent.com/86886489/132982519-0f1d4e11-879e-4eb7-abad-6fde9cef11bf.png)
