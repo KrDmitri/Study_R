@@ -119,3 +119,37 @@ which.min(score)
 ```
 실행 결과  
 ![스크린샷 2021-09-12 오후 6 30 56](https://user-images.githubusercontent.com/86886489/132982519-0f1d4e11-879e-4eb7-abad-6fde9cef11bf.png)
+
+## which()함수의 활용
+```R
+score <- c(76,84,69,50,95,60,82,71,88,84)
+idx <- which(score<=60)
+score[idx] <- 61
+score
+
+idx <- which(score>=80)
+score.high <- score[idx]
+score.high
+```
+위의 코드처럼 원하는 값들의 인덱스를 이용하여 여러 가지 작업을 할 수 있다.  
+
+## subset() 함수를 활용하여 같은 업무 수행하기
+```R
+score <- c(76,84,69,50,95,60,82,71,88,84)
+score.high <- subset(score, score>=80)
+```
+
+## which() 함수를 활용하여 행(row)의 인덱스를 알아내기
+```R
+idx <- which(iris$Petal.Length>5.0)
+idx
+iris.big <- iris[idx,]
+iris.big
+```
+
+## which() 함수를 이용하여 매트릭스, 데이터프레임 안에 있는 특정 값의 행과 열의 위치 알아내기
+arr.ind = TRUE 매개변수를 추가
+```R
+idx <- which(iris[,1:4]>5.0, arr.ind = TRUE)
+idx
+```
