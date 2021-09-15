@@ -195,10 +195,53 @@ for(i in 1:ncol(com)) {                        # 조합을 출력
 
 ## iris 데이터셋에서 각 변수의 🔥품종별 평균 출력
 ```R
-agg <- aggregate(iris[,-5], by=list(iris$Species),
+agg <- aggregate(iris[,-5], by=list(iris$Species),       # 'by=list(iris$Species)'은 집계 작업의 기준이 품종(Species) 열의 값을 의미한다.
                  FUN=mean)
 agg
 ```
-위 aggregate() 함수의 각 매개변수에 대한 의미는 다음과 같다.  
-* iris[,-5]
-집계 작업을 
+
+## iris 데이터셋에서 각 변수의 품종별 표준편차 출력
+```R
+agg <- aggregate(iris[,-5], by=list(iris$Species),
+                 FUN=sd)
+agg
+```
+
+## mtcars 데이터셋에서 각 변수의 최댓값 출력
+mtcars 데이터셋에서 cyl과 vs를 기준으로 다른 열들의 최댓값을 출력하는 코드이다.  
+```R
+head(mtcars)
+agg <- aggregate(mtcars, by=list(cyl=mtcar$cyl,
+                                 vs=mtcars$vs), FUN=max)
+agg
+```
+
+## 데이터 병합(merge)
+데이터 분석을 위해 자료를 모으다 보면 연관된 정보가 여러 파일에 흩어져 있는 경우가 있다. 예를 들면 학생의 성적 정보는 파일A에, 주소 및 연락처는 파일 B에 저자되어 있는 경우가 있다. 이런 경우 분석을 위해 파일 A와 파일 B에 대해 학번을 기준으로 병합하는 것이 필요하다.  
+```R
+x <- data.frame(name=c("a","b","c"), math=c(90,80,40))
+y <- data.frame(name=c("a","b","c"), korean=c(75,60,90))
+x
+y
+
+z <- merge(x,y, by=c("name"))    # 여기서 'x,y'는 병합할 대상 데이터셋이다. 'by=c("name")'은 병합의 기준이 되는 열이 name임을 의미한다.
+z
+```
+<img width="346" alt="스크린샷 2021-09-15 오후 7 47 37" src="https://user-images.githubusercontent.com/86886489/133420125-523ee6e5-c177-4caf-a4d5-333502f77c6e.png">  
+위에 보이는 것과 같이 병합 결과를 보면 x와 y에서 name 열의 값이 일치하는 행들이 연결된 것을 알 수 있다. name열의 값이 c 또는 d인 경우는 상대방 데이터셋에 대응하는 값이 없기 때문에 병합에서 제외되었다.  
+  
+다음은 병합의 기준이 되는 열의 값이 일치되지 않는 경우에도 출력되도록 하는 여러 경우를 나타낸다.  
+```R
+merge(x,y,all.x=T)      # 첫 번째 데이터셋의 행들은 모두 표시되도록
+merge(x,y,all.y=T)      # 두 번째 데이터셋의 행들은 모두 표시되도록
+merge(x,y,all=T)        # 두 데이터셋의 모든 행들이 표시되도록
+```
+  
+마지막으로 다음 코드는 병합의 기준이 되는 열의 이름이 서로 다른 경우에 병합하는 방법을 설명한다.  
+```R
+x <- data.frame(name=c("a","b","c"), math=c(90,80,40))
+y <- data.frame(sname=c("a","b","d"), korean=c(75,60,90))
+x                    # 병합 기준 열의 이름이 name
+y                    # 병합 기준 열의 이름이 sname
+merge(x,y,by.x=c("name"), by.y=c("sname"))
+```
