@@ -27,7 +27,7 @@ pairs(target,                         # 대상 데이터
 ## 상관분석(correlation analysis)과 상관계수
 선형적 관계에서 강한 선형적 관계가 있고 약한 선형적 관계가 있는데, 얼마나 선형성을 보이는지 수치상으로 나타낼 수 있는 방법이 있어야 하는데, 그 방법이 바로 상관분석이다.  
 상관분석은 두 변수 x와 y사이의 선형성 정도를 측정하는 방법으로 다음과 같이 정의된다.  
-<img width="383" alt="스크린샷 2021-09-14 오후 7 43 49" src="https://user-images.githubusercontent.com/86886489/133243883-c42252f3-14bb-47ad-b1fb-102fef4a0298.png">
+<img width="383" alt="스크린샷 2021-09-14 오후 7 43 49" src="https://user-images.githubusercontent.com/86886489/133243883-c42252f3-14bb-47ad-b1fb-102fef4a0298.png">  
 여기서 r을 피어슨 상관계수(Pearson's correlation coefficient), 또는 간단히 줄여서 상관계수(correlation coefficient)라고 부른다. 상관계수는 선형성의 정도를 나타내는 척도로 사용된다.  
 상관 계수 r이 1이나 -1에 가까울수록 x,y의 상관성이 높다.  
 
