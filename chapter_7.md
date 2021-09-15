@@ -117,4 +117,88 @@ iris[order(iris$Species, -iris$Petal.Length,decreasing=T),]   # 정렬 기준이
 ```
 위의 iris[order(iris$Species, -iris$Petal.Length, decreasing=T),] 코드는 iris 데이터셋을 품종별(Species)로 내림차순으로 정렬하고, 같은 품종 내에서는 꽃잎의 길이(Petal.Length)를 기준으로 오름차순으로 정렬하는 명령문이다. iris$Petal.Length 앞에 붙은 (-)기호는 decreasing 에서 선언한 순서와 반대로 하라는 뜻으로, decreasing=T 인 경우는 오름차순의 의미가 된다. 이와 같이 order() 함수 안에 정렬 기준이 되는 열의 이름을 여러 개 나열하는 것도 가능하다.  
 
+## 데이터 분리와 선택
+하나의 데이터셋을 열의 값을 기준으로 여러 개의 데이터셋으로 분리할 때는 split() 함수를 이용하고, 데이터셋으로부터 조건에 맞는 행(row)들을 추출할 때는 subset() 함수를 이용한다.
+```R
+sp <- split(iris, iris$Species)     # 품종별로 데이터 분리
+sp                                  # 분리 결과 확인
+summary(sp)                         # 분리 결과 요약
+sp$setosa                           # setosa 품종의 데이터 확인
+```
+split() 함수를 이용하여 품종(Species) 열의 값을 기준으로 iris 데이터셋의 데이터를 분리하여 sp에 저장한다.  
 
+## 데이터 선택
+아래에서는 subset() 함수를 이용하여 데이터셋으로부터 조건에 맞는 행들을 추출하는 예를 보여준다.
+```R
+subset(iris, Species == "setosa")
+subset(iris, Sepal.Length > 7.5)
+subset(iris, Sepal.Length > 5.1 &
+               Sepal.Width > 3.9)
+
+subset(iris, Sepal.Length >7.6,
+       select=c(Petal.Length,Petal.Width))      # select 매개변수는 추출할 열을 지정하는 역할을 한다.
+```
+
+## 데이터 샘플링(sampling)
+샘플링은 통계 용어로 주어진 값들이 있을 때 그중에서 임의의 개수의 값들을 추출하는 작업을 의미한다.  
+한 번 추출한 값을 다시 저장소에 넣지 않는 방식으로 추출하는 것을 비복원추출, 추출한 값의 내용을 확인하고 다시 저장소에 넣은 후 새로운 값을 추출하는 방식을 복원추출이라고 한다. 데이터 분석에서는 주로 비복원추출을 많이 이용한다.
+
+## 숫자를 임의로 추출하기
+```R
+x <- 1:100
+y <- sample(x, size=10, replace=FALSE)    # 비복원추출
+y
+```
+위 sample() 함수에서 size는 추출할 값의 개수를 지정하는 매개변수이고, replace=FALSE는 비복원추출을 의미한다.  
+
+## 행을 임의로 추출하기
+```R
+idx <- sample(1:nrow(iris), size=50,
+              replace = FALSE)
+iris.50 <- iris[idx,]                # 50개의 행 추출
+dim(iris.50)                         # 행과 열의 개수 확인
+head(iris.50)
+```
+위의 idx <- sample(1:nrow(iris), size=50, replace = FALSE) 코드에서 nrow() 함수는 행의 개수를 알아내는 함수이다. nrow(iris)의 결과값은 150이다. 따라서 이 명령문은 1~150 사이의 숫자 중 50개를 임의로 추출하여 idx에 저장하는 역할을 한다.  
+
+# set.seed() 함수 이해하기
+```R
+sample(1:20, size=5)
+sample(1:20, size=5)
+sample(1:20, size=5)
+
+set.seed(100)
+sample(1:20, size=5)
+set.seed(100)
+sample(1:20, size=5)
+set.seed(100)
+sample(1:20, size=5)
+```
+sample() 함수는 임의로 샘플을 추출하는 방식이기 때문에 함수를 실행할 때마다 매번 그 결과가 다르다. 경우에 따라서는 임의 추출을 하되 다음번에 다시 추출해도 동일한 결과가 나오도록 해야 할 경우가 있다. 이런 경우는 set.seed() 함수를 sample() 함수 실행 전에 먼저 실행하면 된다. set.seed() 함수의 매개변수 값이 같으면 sample() 함수의 결과도 같다.  
+
+## 데이터 조합(combination)
+조합은 글자 그대로 주어진 데이터값들 중에서 몇 개씩 짝을 지어 추출하는 작업을 말한다. R에서는 combn() 함수를 사용하는데, 결과에서 각 열이 하나의 조합을 의미한다.  
+```R
+combn(1:5,3)                                   # 1~5에서 3개를 뽑는 조합
+
+x = c("red","green","blue","black","white")
+com <- combn(x,2)                              # x의 원소를 2개씩 뽑는 조합
+com
+
+for(i in 1:ncol(com)) {                        # 조합을 출력
+        cat(com[,i], "\n")
+}
+```
+
+## 데이터 집계
+매트릭스와 데이터프레임과 같은 2차원 데이터는 데이터 그룹에 대해서 합계나 평균을 계산해야 하는 일이 많다. 이와 같은 작업을 집계(aggregation)라고 하며 R에서는 aggregate() 함수를 통해서 사용 가능하다.  
+
+## iris 데이터셋에서 각 변수의 🔥품종별 평균 출력
+```R
+agg <- aggregate(iris[,-5], by=list(iris$Species),
+                 FUN=mean)
+agg
+```
+위 aggregate() 함수의 각 매개변수에 대한 의미는 다음과 같다.  
+* iris[,-5]
+집계 작업을 
