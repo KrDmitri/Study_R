@@ -24,6 +24,7 @@ treemap(GNI2014,
         bg.labels="yellow",            # 레이블의 배경색
         title="World's GNI")           # 트리맵 제목
 ```
+<img width="1074" alt="스크린샷 2021-09-16 오후 9 19 52" src="https://user-images.githubusercontent.com/86886489/133610931-deba603c-8076-42da-91b6-ca1b5aeb43e1.png">  
 
 ## state.x77 데이터셋으로 트리맵 작성하기
 ```R
@@ -38,6 +39,7 @@ treemap(st,
         type="value",                         # 타일 컬러링 방법
         title="USA states area and income")
 ```
+<img width="1032" alt="스크린샷 2021-09-16 오후 9 20 28" src="https://user-images.githubusercontent.com/86886489/133611026-737681bf-9bae-472e-87dc-e5ac5d86edf3.png">  
 
 ## 버블차트(bubble chart)
 버블차트는 앞에서 배운 산점도 위에 버블의 크기로 정보를 표시하는 시각화 방법이다. 산점도가 2개의 변수에 의한 위치 정보를 표시한다면, 버블차트는 3개의 변수 정보를 하나의 그래프에 표시한다.  
@@ -58,5 +60,6 @@ text(st$Illiteracy, st$Murder,         # 텍스트가 출력될 x,y 좌표
      col="brown")                      # 폰트 컬러
 ```
 버블차트는 두 함수 symbols()와 text()의 조합으로 생성된다. symbols()함수는 2차원 좌표 상에 자료값을 원으로 표시하는 기능을 하고 text() 함수는 원 위에 텍스트, 여기서는 주의 이름을 표시하는 기능을 한다.
-  
+  <img width="1157" alt="스크린샷 2021-09-16 오후 9 21 00" src="https://user-images.githubusercontent.com/86886489/133611109-4d877444-1474-43fb-a41f-6388fe8c92b1.png">  
+
 ## 모자이크 플롯 
