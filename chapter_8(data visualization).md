@@ -62,4 +62,38 @@ text(st$Illiteracy, st$Murder,         # 텍스트가 출력될 x,y 좌표
 버블차트는 두 함수 symbols()와 text()의 조합으로 생성된다. symbols()함수는 2차원 좌표 상에 자료값을 원으로 표시하는 기능을 하고 text() 함수는 원 위에 텍스트, 여기서는 주의 이름을 표시하는 기능을 한다.
   <img width="1157" alt="스크린샷 2021-09-16 오후 9 21 00" src="https://user-images.githubusercontent.com/86886489/133611109-4d877444-1474-43fb-a41f-6388fe8c92b1.png">  
 
-## 모자이크 플롯 
+## 모자이크 플롯(mosic plot)
+모자이크 플롯은 다중변수 범주형 데이터에 대해 각 변수의 그룹별 비율을 면적으로 표시하여 정보를 전달한다.
+```R
+head(mtcars)
+mosaicplot(~gear+vs, data=mtcars, color=TRUE,
+           main="Gear and Vs")
+```
+위에서 '~gear+vs' 코드는 모자이크 플롯을 작성할 대상 변수를 지정하는데, ~ 다음의 변수가 x축 방향으로 표시되고, + 다음의 변수가 y축 방향으로 표시된다.  
+
+## ggplot 패키지
+지금까지 우리는 그래프를 작성할 때 주로 R에서 제공하는 기본적인 함수들을 이용하였다. 데이터 분석에 있어서는 기본 함수들만 이용하여도 충분하지만, 보고서용 그래프와 같이 보다 미적인 그래프를 작성하려면 ggplot 패키지를 주로 이용한다. R의 강점 중의 하나가 ggplot이라고 할 만큼 ggplot은 데이터 시각화에서 널리 사용되고 있다.
+
+## ggplot 명령문의 기본 구조
+```R
+ggplot(data=xx, aes(x=x1,y=x2))+
+  geom_xx()+
+  geom_yy()+
+  ...
+```
+ggplot은 보통 하나의 ggplot() 함수와 여러 개의 geom_xx() 함수들이 +로 연결되어 하나의 그래프를 완성한다. ggplot() 함수의 매개변수로 그래프를 작성할 때 사용할 데이터셋(data=xx)과 데이터셋 안에서 x축,y축으로 사용할 열 이름(aes(x=x1,y=x2))을 지정한다. 그리고 이 데이터를 이용하여 어떤 형태의 그래프를 그릴지를 geom_xx()를 통해 지정한다. 예를 들면 geom_bar()는 ggplot()함수에서 지정한 데이터를 이용하여 막대그래프를 그리는 경우에 사용한다.  
+
+## 막대그래프의 작성
+```R
+library(ggplot2)
+
+month <- c(1,2,3,4,5,6)
+rain <- c(55,50,45,50,60,70)
+df <- data.frame(month, rain)       # 그래프를 작성할 대상 데이터
+df
+
+ggplot(df, aes(x=month,y=rain))+    # 그래프를 그릴 데이터 지정
+  geom_bar(stat="identity",         # 막대의 높이는 y축에 해당하는 열의 값
+           width=0.7,               # 막대의 폭 지정
+           fill="steelblue")        # 막대의 색 지정
+```
