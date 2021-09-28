@@ -69,7 +69,9 @@ head(mtcars)
 mosaicplot(~gear+vs, data=mtcars, color=TRUE,
            main="Gear and Vs")
 ```
-위에서 '~gear+vs' 코드는 모자이크 플롯을 작성할 대상 변수를 지정하는데, ~ 다음의 변수가 x축 방향으로 표시되고, + 다음의 변수가 y축 방향으로 표시된다.  
+위에서 '~gear+vs' 코드는 모자이크 플롯을 작성할 대상 변수를 지정하는데, ~ 다음의 변수가 x축 방향으로 표시되고, + 다음의 변수가 y축 방향으로 표시된다. 
+![스크린샷 2021-09-28 오후 8 21 37](https://user-images.githubusercontent.com/86886489/135077525-f7c9e14c-2728-4ddb-8264-ef30a3b33bb7.png)  
+
 
 ## ggplot 패키지
 지금까지 우리는 그래프를 작성할 때 주로 R에서 제공하는 기본적인 함수들을 이용하였다. 데이터 분석에 있어서는 기본 함수들만 이용하여도 충분하지만, 보고서용 그래프와 같이 보다 미적인 그래프를 작성하려면 ggplot 패키지를 주로 이용한다. R의 강점 중의 하나가 ggplot이라고 할 만큼 ggplot은 데이터 시각화에서 널리 사용되고 있다.
@@ -97,3 +99,6 @@ ggplot(df, aes(x=month,y=rain))+    # 그래프를 그릴 데이터 지정
            width=0.7,               # 막대의 폭 지정
            fill="steelblue")        # 막대의 색 지정
 ```
+![스크린샷 2021-09-28 오후 8 24 15](https://user-images.githubusercontent.com/86886489/135077867-ac484daa-caf8-47c3-86ad-d18459051021.png)  
+
+
