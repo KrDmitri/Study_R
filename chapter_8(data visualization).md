@@ -62,7 +62,7 @@ text(st$Illiteracy, st$Murder,         # 텍스트가 출력될 x,y 좌표
 버블차트는 두 함수 symbols()와 text()의 조합으로 생성된다. symbols()함수는 2차원 좌표 상에 자료값을 원으로 표시하는 기능을 하고 text() 함수는 원 위에 텍스트, 여기서는 주의 이름을 표시하는 기능을 한다.
   <img width="1157" alt="스크린샷 2021-09-16 오후 9 21 00" src="https://user-images.githubusercontent.com/86886489/133611109-4d877444-1474-43fb-a41f-6388fe8c92b1.png">  
 
-## 모자이크 플롯(mosic plot)
+## 모자이크 플롯(mosaic plot)
 모자이크 플롯은 다중변수 범주형 데이터에 대해 각 변수의 그룹별 비율을 면적으로 표시하여 정보를 전달한다.
 ```R
 head(mtcars)
