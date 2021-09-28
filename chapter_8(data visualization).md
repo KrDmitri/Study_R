@@ -101,4 +101,89 @@ ggplot(df, aes(x=month,y=rain))+    # 그래프를 그릴 데이터 지정
 ```
 ![스크린샷 2021-09-28 오후 8 24 15](https://user-images.githubusercontent.com/86886489/135077867-ac484daa-caf8-47c3-86ad-d18459051021.png)  
 
+## 막대그래프 꾸미기
+```R
+ggplot(df, aes(x=month,y=rain))+       # 그래프를 그릴 데이터 지정
+  geom_bar(stat="identity",            # 막대의 높이는 y축에 해당하는 열의 값
+           width=0.7,                  # 막대의 폭 지정
+           fill="steelblue")+          # 막대의 색 지정
+  ggtitle("monthly precipitation")+    # 그래프의 제목 지정
+  theme(plot.title = element_text(size=25, face="bold", colour="steelblue"))+
+  labs(x="month", y="precipitation")+  # 그래프의 x, y축 레이블 지정
+  coord_flip()                         # 그래프를 가로 방향으로 출력
+```
+![스크린샷 2021-09-28 오후 8 34 10](https://user-images.githubusercontent.com/86886489/135079160-f9d22e28-341d-41e8-bf87-2d9e9aea5f1a.png)
+
+## 히스토그램의 작성
+```R
+library(ggplot2)
+
+ggplot(iris, aes(x=Petal.Length))+      # 그래프를 그릴 데이터 지정
+  geom_histogram(binwidth=0.5)          # 히스토그램 작성
+```
+'binwidth=0.5' 의미 : 히스토그램은 연속형 숫자 자료에 대해 일정 길이로 구간을 나눈 후 각 구간에 속하는 자료값이 몇 개 있는지 카운트한다. binwidth는 구간의 길이를 지정하는 매개변수로 이 경우는 꽃잎의 길이를 0.5 간격으로 나누라는 의미이다.  
+![스크린샷 2021-09-28 오후 8 52 32](https://user-images.githubusercontent.com/86886489/135081611-20ac29eb-12f5-4d6b-878a-73bfac9b9824.png) 
+
+
+## 그룹별 히스토그램 작성하기
+```R
+library(ggplot2)
+
+ggplot(iris, aes(x=Sepal.Width, fill=Species, color=Species))+
+  geom_histogram(binwidth=0.5, position="dodge")+
+  theme(legend.position="top")
+```
+'fill=Species' 의미 : 히스토그램의 막대 내부를 채울 색을 지정한다. 여기서는 Species(품종)를 지정했는데, Species(품종)는 팩터 타입이기 때문에 숫자 1, 2, 3으로 변환될 수 있다. 품종별로 막대의 색이 다르게 채워진다.  
+'position="dodge"' 의미 : 이 히스토그램은 3개 품종의 히스토그램이 하나의 그래프에 작성된다. 동일 구간에 대해 3개의 막대가 그려진다. position은 동일 구간의 막대들을 어떻게 그릴지를 지정하는데, "dodge"는 막대들을 겹치지 않고 병렬로 그리도록 지정하는 것이다.  
+
+![스크린샷 2021-09-28 오후 9 28 13](https://user-images.githubusercontent.com/86886489/135086565-d50d0b71-3d88-4ba2-840b-9ac8b788ef53.png)  
+
+## 산점도의 작성
+```R
+library(ggplot2)
+
+ggplot(data=iris, aes(x=Petal.Length, y=Petal.Width)) +
+  geom_point()       # 산점도를 작성하는 함수
+```
+
+## 그룹이 구분되는 산점도 작성하기
+```R
+library(ggplot2)
+
+ggplot(data=iris, aes(x=Petal.Length, y=Petal.Width,
+                      color=Species)) +
+  geom_point(size=3) +
+  ggtitle("Petal length and width") +                  # 그래프의 제목 지정
+  theme(plot.title=element_text(size=25, face="bold", colour="steelblue"))
+```
+![스크린샷 2021-09-28 오후 9 37 08](https://user-images.githubusercontent.com/86886489/135088206-8b85856b-5780-47e6-95f1-ec208bd90d90.png)  
+
+## 상자그림의 작성
+```R
+library(ggplot2)
+
+ggplot(data=iris, aes(y=Petal.Length)) +
+  geom_boxplot(fill="yellow")
+```
+
+## 그룹별 상자그림 작성하기
+```R
+ggplot(data=iris, aes(y=Petal.Length, fill=Species)) +
+  geom_boxplot()
+```
+
+## 선그래프의 작성
+```R
+library(ggplot2)
+
+year <- 1937:1960
+cnt <- as.vector(airmiles)
+df <- data.frame(year,cnt)
+head(df)
+
+ggplot(data=df, aes(x=year, y=cnt)) +
+  geom_line(col="red")
+```
+![스크린샷 2021-09-28 오후 9 46 45](https://user-images.githubusercontent.com/86886489/135089667-4136b957-ab11-450b-bba4-02a37e24c632.png)  
+
 
